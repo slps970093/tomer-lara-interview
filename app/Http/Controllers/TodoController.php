@@ -50,4 +50,9 @@ class TodoController extends Controller
             'status' => 'ok'
         ],201);
     }
+
+    public function completed($id){
+        $this->todoRepository->completed($id);
+        return Redirect::to('/');
+    }
 }

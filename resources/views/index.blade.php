@@ -37,7 +37,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Modify</h4>
             </div>
             <div class="modal-body">
                 <form id="modifyForm">
@@ -113,11 +113,19 @@
                     @foreach( $data as $row)
                     <tr>
                         <td class="col-sm-6">
+                            @if ( $row->is_completed == 1)
                             <del>{{ $row->name }}</del>
+                            @else
+                            {{ $row->name }}
+                            @endif
                         </td>
                         <!-- Task Buttons -->
                         <td class="col-sm-6">
-                            <button type="submit" class="btn btn-success" ><i class="fa fa-btn fa-thumbs-o-up"></i>completed</button>
+                            @if ( $row->is_completed == 1)
+                            <button type="submit" class="btn btn-success" disabled  ><i class="fa fa-btn fa-thumbs-o-up"></i>completed</button>
+                            @else
+                                <button type="submit" class="btn btn-success" onclick="completed( {{ $row->id }} )"  ><i class="fa fa-btn fa-thumbs-o-up"></i>completed</button>
+                            @endif
                             <button type="button" class="btn btn-primary" onclick="showModifyModel( {{ $row->id }},'{{ $row->name }}')" ><i class="fa fa-btn fa-pencil" ></i>edit</button>
                             <button type="button" class="btn btn-danger" onclick="sendDelete({{ $row->id }})"><i class="fa fa-btn fa-trash"></i>delete</button>
                         </td>
@@ -162,6 +170,10 @@
                 }
             })
         }
+    }
+
+    function completed(pk){
+        window.location = "{{ url('completed') }}/"+pk;
     }
 </script>
 </body>

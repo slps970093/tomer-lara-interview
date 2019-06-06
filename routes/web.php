@@ -19,3 +19,6 @@ Route::post('/','TodoController@create');
 Route::post('modify/{id}','TodoController@modify');
 
 Route::get('delete/{id}','TodoController@delete');
+
+
+Route::get('completed/{id}','TodoController@completed');

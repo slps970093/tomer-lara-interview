@@ -34,4 +34,10 @@ class TodoRepository
         $res->delete();
     }
 
+    public function completed($primaryKey){
+        $res = $this->todo->find($primaryKey);
+        $res->is_completed = 1;
+        $res->save();
+    }
+
 }
